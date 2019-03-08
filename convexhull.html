@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="./convexhull.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://unpkg.com/v-tooltip"></script>
+    <title>Convex hull visualiser</title>
+
+</head>
+
+<body>
+    <div id="app">
+        <h1>Convex hull algorithm visualiser</h1>
+        <p>This app helps with visualising the behaviour of the Giftwrap (Jarvis Scan)
+           and Graham Scan convex Hull algorithms</p>
+        <div>
+            <label for="algorithm-select">Algorithm
+                <select id="algorithm-select" v-model="algorithm" v-on:change="start">
+                    <option value="jarvis">Gift wrap</option>
+                    <option value="graham">Graham scan</option>
+                </select>
+            </label>
+            <label class="file" v-tooltip.right="'Reload point set from a file. File must be a sequence of unique x y integer pairs in the range [0, 100], preferably whitespace separated though all non-numeric characters are ignored'" for="file-input">Upload points
+                <input id="file-input" type='file' ref='file' v-on:change="upload"/>
+            </label>
+            <br>
+
+            <button type="button" class="btn btn-primary" v-on:click="clear">Clear</button>
+            <button type="button" class="btn btn-primary"
+                     v-on:click="addPoints">Add {{ countString}} points</button>
+            <label class="slider" for="numpoints-slider"># points
+            <input type="range" id='numpoints-slider' name="countslider" min="1" max="100" v-model="countString" />
+            </label>
+
+            <div id="convexhull"></div>
+            <!--button type="button" class="btn btn-primary" v-on:click="start" v-bind:disabled=startDisabled>Start</button-->
+            <button type="button" class="btn btn-primary" v-on:click="next" v-bind:disabled=nextDisabled>Next</button>
+            <button type="button" class="btn btn-primary" v-on:click="previous" v-bind:disabled=previousDisabled>Previous</button>
+            <label class="slider" for="hulls-slider">State
+            <input type="range" id='hulls-slider' name="hullslider" min="0" v-bind:max="statesMax" v-model="stateIndexString" />
+            <span id='state-info-span'>{{points.length}} points, state {{currentStateIndex}} of {{statesMax}}</span>
+            </label>
+        </div>
+    </div>
+
+
+<script data-main="build/convexhull.js" src="./require.js"></script>
+</body>
+
+</html>
