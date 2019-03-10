@@ -19,6 +19,7 @@ define(["geom"], function (geom) {
 
     const TEST_LINE_STYLE = {color: 'blue', width: 2, dash: 'dot', name: 'Candidate'};
     const SORTED_POINTS_STYLE = {color: 'rgb(200, 200, 200)', width: 1, dash: 'dash', name: 'Skeleton'};
+    const RADIUS_VECTOR_STYLE = {color: 'rgb(150, 150, 255)', width: 1, dash: 'solid', name: 'Sorted radius vectors'};
 
     // Return a sequence of states to visualise the progress of the
     // Graham Scan convex hull algorithm. State0 represents the starting state
@@ -29,7 +30,8 @@ define(["geom"], function (geom) {
     //
     function grahamScan(points) {
 
-        var p, p0, hull = [], i, states = [], rest, skeleton = {points: [], style: SORTED_POINTS_STYLE};
+        var p, p0, hull = [], i, states = [],
+            vectors = [], rest, skeleton = {points: [], style: SORTED_POINTS_STYLE};
 
         function pushState(lines) {
             states.push({lines: [skeleton].concat(lines), hull: hull.slice()});
@@ -48,8 +50,14 @@ define(["geom"], function (geom) {
             pushState([]);
         }
 
-        if (points.length < 2) {
-            return [];
+        if (points.length < 3) {
+            // With fewer than 3 points, just return those points as the hull
+            hull = points;
+            if (points.length == 2) {
+                hull.push(points[0]); // If there are two points, close the hull
+            }
+            pushState([]);
+            return states;
         }
 
         // Get the bottom-most (and left-most if necessary) point as points[0]
@@ -81,11 +89,17 @@ define(["geom"], function (geom) {
 
         pushState([]);
         skeleton = {points:[p0].concat(rest).concat([p0]), style: SORTED_POINTS_STYLE};
-        hull = [p0];
-        pushState([]);  // Display the skeleton
-
-        // Now generate the hull
+        vectors.push(p0);
         for (i = 0; i < rest.length; i++) {
+            vectors.push(rest[i]);
+            vectors.push(p0);
+        }
+        pushState({points: vectors, style: RADIUS_VECTOR_STYLE});  // Display the skeleton plus vectors from p0
+        hull = [p0, rest[0], rest[1]];
+        pushState([]);  // Followed by the hull's first 3 points
+
+        // Now generate the rest of the hull
+        for (i = 2; i < rest.length; i++) {
             keepLeft(rest[i]);
         }
 
