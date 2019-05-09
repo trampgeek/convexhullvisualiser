@@ -40,8 +40,8 @@
 
             <div id="convexhull"></div>
             <!--button type="button" class="btn btn-primary" v-on:click="start" v-bind:disabled=startDisabled>Start</button-->
-            <button type="button" class="btn btn-primary" v-on:click="next" v-bind:disabled=nextDisabled>Next</button>
             <button type="button" class="btn btn-primary" v-on:click="previous" v-bind:disabled=previousDisabled>Previous</button>
+            <button type="button" class="btn btn-primary" v-on:click="next" v-bind:disabled=nextDisabled>Next</button>
             <label class="slider" for="hulls-slider">State
             <input type="range" id='hulls-slider' name="hullslider" min="0" v-bind:max="statesMax" v-model="stateIndexString" />
             <span id='state-info-span'>{{points.length}} points, state {{currentStateIndex}} of {{statesMax}}</span>
