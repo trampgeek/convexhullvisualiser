@@ -41,7 +41,7 @@ define(["geom"], function (geom) {
         }
         for (i = 1; i < points.length; i++) {
             p = points[i];
-            if (p[1] < bottommost[1] || (p[1] === bottommost[1] && p[0] > bottommost[0])) {
+            if (p[1] < bottommost[1] || (p[1] === bottommost[1] && p[0] < bottommost[0])) {
                 bottommost = p;
             }
         }

@@ -63,7 +63,7 @@ define(["geom"], function (geom) {
         // Get the bottom-most (and left-most if necessary) point as points[0]
         for (i = 1; i < points.length; i++) {
             p = points[i];
-            if (p[1] < points[0][1] || (p[1] === points[0][1] && p[0] > points[0][0])) {
+            if (p[1] < points[0][1] || (p[1] === points[0][1] && p[0] < points[0][0])) {
                 points[i] = points[0];
                 points[0] = p;
             }
