@@ -30,11 +30,10 @@
                 <input id="file-input" type='file' ref='file' v-on:change="upload"/>
             </label>
            <a href="#" @click="togglefileuploadhelp=!togglefileuploadhelp">{{ togglefileuploadhelp ? 'Hide' : 'Show' }} file upload help</a>
-
             <div  v-show="togglefileuploadhelp">
             <p>Reload point set from a file. File must be a sequence of unique x y integer pairs in the range [0, 100], preferably whitespace separated though all non-numeric characters are ignored.
             </div>
-
+            <br>
             <button type="button" class="btn btn-primary" v-on:click="clear">Clear</button>
             <button type="button" class="btn btn-primary"
                      v-on:click="addPoints">Add {{ countString}} points</button>
