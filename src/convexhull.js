@@ -25,7 +25,6 @@ require(["geom", "plotter", "giftwrap", "grahamscan"], function (geom, plotter, 
     const FUNCS = {jarvis: giftwrap, graham: grahamscan };
     const POINT_PLOT_MODES = {jarvis: 'markers+text', graham: 'markers'};
 
-    Vue.use(VTooltip);
     var app = new Vue({
         el: '#app',
 
@@ -36,6 +35,7 @@ require(["geom", "plotter", "giftwrap", "grahamscan"], function (geom, plotter, 
             currentStateIndex: 0,
             stateIndexString: '0',
             algorithm: 'jarvis',
+            togglefileuploadhelp: false,
         },
 
         mounted: function() {
