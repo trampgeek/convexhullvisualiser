@@ -77,6 +77,10 @@ require(["geom", "plotter", "giftwrap", "grahamscan"], function (geom, plotter, 
                 rdr.readAsText(file);
             },
 
+            resetfile: function(event) {
+                this.$refs.file.value = '';
+            },
+
             clear: function() {
                 this.points = [];
                 this.states = [];

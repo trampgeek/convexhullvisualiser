@@ -27,9 +27,9 @@
                 </select>
             </label>
             <label class="file" for="file-input">Upload points
-                <input id="file-input" type='file' ref='file' v-on:change="upload"/>
+                <input id="file-input" type='file' ref='file' @change="upload" @click="resetfile"/>
             </label>
-           <a href="#" @click="togglefileuploadhelp=!togglefileuploadhelp">{{ togglefileuploadhelp ? 'Hide' : 'Show' }} file upload help</a>
+            <a href="#" @click="togglefileuploadhelp=!togglefileuploadhelp">{{ togglefileuploadhelp ? 'Hide' : 'Show' }} file upload help</a>
             <div  v-show="togglefileuploadhelp">
             <p>Reload point set from a file. File must be a sequence of unique x y integer pairs in the range [0, 100], preferably whitespace separated though all non-numeric characters are ignored.
             </div>
