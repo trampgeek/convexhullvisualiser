@@ -15,6 +15,9 @@
 // The module that plots the Convex Hull as it is being constructed..
 // Uses Plotly, which must be loaded by the html.
 //
+/*jshint esnext: true */
+
+const LABEL_PREFIX = 'p';
 
 define(['geom'], function(geom) {
 
@@ -40,7 +43,7 @@ define(['geom'], function(geom) {
                 xs.push(p[0]);
                 ys.push(p[1]);
             }
-            labels.push('' + i);
+            labels.push(LABEL_PREFIX + i);
         }
 
         trace = {x: xs, y: ys, mode: mode};
@@ -75,7 +78,8 @@ define(['geom'], function(geom) {
                 b: 60,
                 t: 60,
                 pad: 0
-            }
+            },
+            font: {size:24}
         };
         config = {
             displayModeBar: false,

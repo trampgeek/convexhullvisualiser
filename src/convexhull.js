@@ -24,12 +24,17 @@ require(["geom", "plotter", "giftwrap", "grahamscan"], function (geom, plotter, 
 
     const FUNCS = {jarvis: giftwrap, graham: grahamscan };
     const POINT_PLOT_MODES = {jarvis: 'markers+text', graham: 'markers'};
+    const LABEL_GRAHAM_SCAN_POINTS = true;
+
+    if (LABEL_GRAHAM_SCAN_POINTS) {
+        POINT_PLOT_MODES.graham = 'markers+text';
+    }
 
     var app = new Vue({
         el: '#app',
 
         data: {
-            points: [[30, 70], [40, 11], [96, 22], [16, 88], [54, 99], [83, 35], [44, 45]],
+            points: [[30, 70], [40, 11], [96, 22], [16, 88], [54, 97], [83, 35], [44, 45]],
             countString: "5",
             states: [],
             currentStateIndex: 0,

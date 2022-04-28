@@ -87,6 +87,12 @@ define(["geom"], function (geom) {
                 }
             });
 
+        // Copy sorted points back over original data in case the display
+        // is numbering the points.
+        for (i = 1; i < points.length; i++) {
+            points[i] = [rest[i - 1].x, rest[i - 1].y];
+        }
+
         pushState([]);
         skeleton = {points:[p0].concat(rest).concat([p0]), style: SORTED_POINTS_STYLE};
         vectors.push(p0);
